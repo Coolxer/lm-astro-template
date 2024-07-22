@@ -32,9 +32,16 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     mdx(),
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        page !== `${data.site.domain}/stylebook/` &&
+        page !== `${data.site.domain}/polityka-prywatnosci/`,
+    }),
     icon({
       iconDir: "src/assets/icons",
+      include: {
+        tabler: ["*"],
+      },
     }),
     devtoolBreakpoints(),
     react(),
@@ -81,4 +88,7 @@ export default defineConfig({
     },
   },
   redirects: {},
+  devToolbar: {
+    enabled: true,
+  },
 })

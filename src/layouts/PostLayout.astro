@@ -3,7 +3,7 @@ import type { MarkdownHeading } from "astro"
 import type { CollectionEntry } from "astro:content"
 import { Icon } from "astro-icon/components"
 
-import { readingTime } from "@utils/utils"
+// import { readingTime } from "@utils/utils"
 
 import data from "~/data/site.json"
 
@@ -36,16 +36,20 @@ const { post, headings, meta, schema, relatedPosts, prevPost, nextPost } =
 ---
 
 <Layout meta={meta} schema={schema}>
-  <header class="align-center flex flex-col items-center gap-4 bg-gray py-12">
-    <!-- Breadcrumbs -->
-    <MyBreadCrumbs />
-    {post.data.title && <h1>{post.data.title}</h1>}
-    {post.data.subheading && <p class="text-lg">{post.data.subheading}</p>}
+  <header
+    class="align-center flex flex-col items-center gap-4 bg-accent-darkest px-6 py-8 text-white md:py-16">
+    <div
+      class="flex max-w-prose flex-col items-center justify-center gap-4 text-center">
+      <!-- Breadcrumbs -->
+      <MyBreadCrumbs />
+      {post.data.title && <h1>{post.data.title}</h1>}
+      {post.data.subheading && <p class="text-lg">{post.data.subheading}</p>}
 
-    <!-- Reading time -->
-    <!-- <div class="flex flex-col text-center">
+      <!-- Reading time -->
+      <!-- <div class="flex flex-col text-center">
       {readingTime(post.body)}
     </div> -->
+    </div>
   </header>
 
   {
@@ -54,7 +58,8 @@ const { post, headings, meta, schema, relatedPosts, prevPost, nextPost } =
         <MyImage
           src={post.data.image.src}
           alt={post.data.image.alt}
-          class="w-1/2"
+          class="md:w-1/2"
+          loading="eager"
         />
       </Section>
     )
@@ -88,7 +93,8 @@ const { post, headings, meta, schema, relatedPosts, prevPost, nextPost } =
   </Section>
 
   <Section>
-    <div class="flex flex-row justify-between">
+    <div
+      class="flex w-full flex-col justify-between gap-4 md:flex-row md:gap-0">
       <!-- Post categories -->
       {post.data.categories && <Categories categories={post.data.categories} />}
 
@@ -116,7 +122,7 @@ const { post, headings, meta, schema, relatedPosts, prevPost, nextPost } =
     relatedPosts.length > 0 && (
       <Section noTopPadding>
         <p class="text-h4">Powiązane posty</p>
-        <Row>
+        <Row maxColumns={4}>
           {relatedPosts.length > 0 &&
             relatedPosts.map((post) => <PostCard post={post} />)}
         </Row>
