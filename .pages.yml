@@ -1,3 +1,16 @@
 media: 
   input: src/assets/images
   output: src/assets/images
+content:
+  - name: posts
+    label: Posts
+    path: src/content/blog
+    type: collection
+    fields:
+      (...)
+  - name: authors
+    label: Authors
+    path: src/_data/authors.json
+    type: file
+    fields:
+      (...)
